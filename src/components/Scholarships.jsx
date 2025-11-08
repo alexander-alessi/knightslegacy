@@ -7,9 +7,33 @@
  * Copyright (c) 2025 Knights Legacy Fund. All rights reserved.
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Scholarships = ({ onNavigate }) => {
+  const [partners, setPartners] = useState([]);
+  const [eventSponsors, setEventSponsors] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // Load both JSON files
+    Promise.all([
+      fetch('/data/sponsors.json').then(r => r.ok ? r.json() : []),
+      fetch('/data/sponsors-event.json').then(r => r.ok ? r.json() : [])
+    ])
+      .then(([partnersData, eventData]) => {
+        setPartners(partnersData);
+        setEventSponsors(eventData);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Failed to load sponsor data:', err);
+        setError('Using fallback data');
+        setLoading(false);
+        // Optional: fallback to hardcoded data
+      });
+  }, []);
+
   return (
     <div className="max-w-5xl mx-auto space-y-12">
 
@@ -84,66 +108,62 @@ const Scholarships = ({ onNavigate }) => {
           </p>
 
           <div className="mt-12 overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b-2 border-llhs-gold">
-                  <th className="py-4 px-6 text-sm font-semibold text-llhs-maroon uppercase tracking-wider">
-                    Partner
-                  </th><th className="py-4 px-6"></th><th className="py-4 px-6 text-sm font-semibold text-llhs-maroon uppercase tracking-wider text-center">
-                    Tier
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  { 
-                    name: 'Pan Coast Pizza', 
-                    tier: 'Gold', 
-                    slug: 'pan-coast-pizza.png',
-                    url: 'https://pancoastpizza.com/'
-                  },
-                  { 
-                    name: 'Bedell Frazier', 
-                    tier: 'Gold', 
-                    slug: 'bedell-frazier.png',
-                    url: 'https://bedellfrazier.com/'
-                  },
-                  { 
-                    name: 'F&M Bank', 
-                    tier: 'Bronze', 
-                    slug: 'fm-bank.png',
-                    url: 'https://www.fmbonline.com/'
-                  },
-                ].map((p) => (
-                  <tr key={p.slug} className="border-b border-gray-200 hover:bg-gray-50 transition">
-                    <td className="py-6 px-6">
-                      <a
-                        href={p.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-bold text-llhs-maroon hover:text-llhs-gold hover:underline transition-all duration-200"
-                      >
-                        {p.name}
-                      </a>
-                    </td>
-                    <td className="py-6 px-6">
-                      <div className="w-24 h-24 mx-auto flex items-center justify-center">
-                        <img
-                          src={`/assets/partners/${p.slug}`}
-                          alt={p.name}
-                          className="max-w-full max-h-full object-contain"
-                        />
-                      </div>
-                    </td>
-                    <td className="py-6 px-6 text-center">
-                      <span className="inline-block px-3 py-1 text-sm font-medium text-llhs-maroon bg-llhs-gold/20 rounded-full">
-                        {p.tier}
-                      </span>
-                    </td>
+            {loading && !partners.length ? (
+              <p className="text-center py-8 text-gray-500">Loading partners...</p>
+            ) : (
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b-2 border-llhs-gold">
+                    <th className="py-4 px-6 text-sm font-semibold text-llhs-maroon uppercase tracking-wider">
+                      Partner
+                    </th>
+                    <th className="py-4 px-6"></th>
+                    <th className="py-4 px-6 text-sm font-semibold text-llhs-maroon uppercase tracking-wider text-center">
+                      Tier
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {partners.length > 0 ? (
+                    partners.map((p) => (
+                      <tr key={p.slug} className="border-b border-gray-200 hover:bg-gray-50 transition">
+                        <td className="py-6 px-6">
+                          <a
+                            href={p.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-bold text-llhs-maroon hover:text-llhs-gold hover:underline transition-all duration-200"
+                          >
+                            {p.name}
+                          </a>
+                        </td>
+                        <td className="py-6 px-6">
+                          <div className="w-24 h-24 mx-auto flex items-center justify-center">
+                            <img
+                              src={`/assets/partners/${p.slug}`}
+                              alt={p.name}
+                              className="max-w-full max-h-full object-contain"
+                            />
+                          </div>
+                        </td>
+                        <td className="py-6 px-6 text-center">
+                          <span className="inline-block px-3 py-1 text-sm font-medium text-llhs-maroon bg-llhs-gold/20 rounded-full">
+                            {p.tier}
+                          </span>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="3" className="py-8 text-center text-gray-500">
+                        No partners listed yet.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            )}
+            {error && <p className="text-center text-sm text-red-600 mt-2">{error}</p>}
           </div>
         </div>
       </section>
@@ -163,54 +183,58 @@ const Scholarships = ({ onNavigate }) => {
           </p>
 
           <div className="mt-12 overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b-2 border-llhs-gold">
-                  <th className="py-4 px-6 text-sm font-semibold text-llhs-maroon uppercase tracking-wider">
-                    Sponsor
-                  </th>
-                  <th className="py-4 px-6 text-sm font-semibold text-llhs-maroon uppercase tracking-wider">
-                    Role
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  { 
-                    name: 'Mike Hess Brewing', 
-                    role: 'Event Sponsor', 
-                    slug: 'mike-hess.png',
-                    url: 'https://mikehessbrewing.com'
-                  },
-                  // Add more as they come
-                ].map((s) => (
-                  <tr key={s.slug} className="border-b border-gray-200 hover:bg-gray-50 transition">
-                    <td className="py-6 px-6 flex items-center gap-5">
-                      <a
-                        href={s.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-bold text-llhs-maroon hover:text-llhs-gold hover:underline transition-all duration-200"
-                      >
-                        {s.name}
-                      </a>
-                      <div className="w-24 h-24 flex-shrink-0">
-                        <img
-                          src={`/assets/partners/${s.slug}`}
-                          alt={s.name}
-                          className="w-full h-full object-contain"
-                        />
-                      </div>
-                    </td>
-                    <td className="py-6 px-6">
-                      <span className="inline-block px-3 py-1 text-sm font-medium text-llhs-maroon bg-llhs-gold/20 rounded-full">
-                        {s.role}
-                      </span>
-                    </td>
+            {loading && !eventSponsors.length ? (
+              <p className="text-center py-8 text-gray-500">Loading event sponsors...</p>
+            ) : (
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b-2 border-llhs-gold">
+                    <th className="py-4 px-6 text-sm font-semibold text-llhs-maroon uppercase tracking-wider">
+                      Sponsor
+                    </th>
+                    <th className="py-4 px-6 text-sm font-semibold text-llhs-maroon uppercase tracking-wider">
+                      Role
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {eventSponsors.length > 0 ? (
+                    eventSponsors.map((s) => (
+                      <tr key={s.slug} className="border-b border-gray-200 hover:bg-gray-50 transition">
+                        <td className="py-6 px-6 flex items-center gap-5">
+                          <a
+                            href={s.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-bold text-llhs-maroon hover:text-llhs-gold hover:underline transition-all duration-200"
+                          >
+                            {s.name}
+                          </a>
+                          <div className="w-24 h-24 flex-shrink-0">
+                            <img
+                              src={`/assets/partners/${s.slug}`}
+                              alt={s.name}
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                        </td>
+                        <td className="py-6 px-6">
+                          <span className="inline-block px-3 py-1 text-sm font-medium text-llhs-maroon bg-llhs-gold/20 rounded-full">
+                            {s.role}
+                          </span>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="2" className="py-8 text-center text-gray-500">
+                        No event sponsors listed yet.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            )}
           </div>
         </div>
       </section>

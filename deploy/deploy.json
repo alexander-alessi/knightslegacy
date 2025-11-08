@@ -1,0 +1,12 @@
+{
+	"environments": {
+		"stag": {
+			"bucket_url": "NA",
+			"cf_distro": "NA"
+		},
+		"prod": {
+			"bucket_url": "s3://knightslegacy",
+			"cf_distro": "E86UB0B4X6XFW"
+		}
+	}
+}

@@ -35,7 +35,7 @@ const Donate = () => {
 
               <div className="text-center space-y-4">
                 <a
-                  href="https://donate.stripe.com/6oE6qJ5YQ4ZJ9a8fYZ"
+                  href="https://donate.stripe.com/00w4gzgrd9YG36v5xe2cg00"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block bg-llhs-maroon text-white font-bold py-4 px-10 rounded-full hover:bg-llhs-maroon/90 transition shadow-lg"

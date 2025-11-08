@@ -7,14 +7,50 @@
  * Copyright (c) 2025 Knights Legacy Fund. All rights reserved.
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const Home = ({ onNavigate }) => {
-  const raised = 32800;
-  const goal   = 50000;
-  const percent = Math.round((raised / goal) * 100);
+  const [raised, setRaised] = useState(0);
+  const [goal, setGoal] = useState(50000);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetch('/data/fund.json')
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to load funding data');
+        return res.json();
+      })
+      .then(data => {
+        setRaised(data.raised || 0);
+        setGoal(data.goal || 50000);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setError(err.message);
+        setLoading(false);
+        // Fallback values
+        setRaised(32800);
+        setGoal(50000);
+      });
+  }, []);
+
+  const percent = goal > 0 ? Math.round((raised / goal) * 100) : 0;
+
+  // Animate progress bar after data loads
+  useEffect(() => {
+    if (!loading && !error) {
+      const el = document.querySelector('.progress-fill');
+      if (el) {
+        setTimeout(() => {
+          el.style.width = `${percent}%`;
+        }, 100);
+      }
+    }
+  }, [loading, error, percent]);
 
   return (
     <div className="space-y-16 max-w-5xl mx-auto">
@@ -55,28 +91,27 @@ const Home = ({ onNavigate }) => {
 
           {/* Goal Label */}
           <div className="text-right text-sm font-medium text-gray-600 mb-2">
-            2025 Goal: <span className="font-bold text-llhs-maroon">$50,000</span>
+            2025 Goal: <span className="font-bold text-llhs-maroon">${goal.toLocaleString()}</span>
           </div>
 
           {/* Progress Bar */}
           <div className="relative h-12 bg-white rounded-full overflow-hidden shadow-inner border-2 border-llhs-gold">
-            {/* Red Fill INSIDE */}
             <div
-              className="absolute inset-y-0 left-0 bg-llhs-maroon transition-all duration-[2200ms] ease-out flex items-center justify-end pr-6"
+              className="progress-fill absolute inset-y-0 left-0 bg-llhs-maroon transition-all duration-[2200ms] ease-out flex items-center justify-end pr-6"
               style={{ width: 0 }}
-              ref={(el) => {
-                if (el) {
-                  setTimeout(() => {
-                    el.style.width = '66%';
-                  }, 100);
-                }
-              }}
             >
               <span className="text-base md:text-lg font-bold text-white drop-shadow tracking-tight">
-                $32,800
+                ${raised.toLocaleString()}
               </span>
             </div>
           </div>
+
+          {loading && (
+            <p className="text-center text-sm text-gray-500 mt-4">Loading progress...</p>
+          )}
+          {error && (
+            <p className="text-center text-sm text-red-600 mt-4">Using cached values</p>
+          )}
 
           <p className="text-center text-sm text-gray-600 mt-4 italic">
             Every gift helps a Knight rise.
@@ -118,7 +153,6 @@ const Home = ({ onNavigate }) => {
             </div>
           </div>
 
-          {/* Leadership Team Image */}
           <div className="mt-16">
             <img
               src="/assets/team/leadership-team.png"

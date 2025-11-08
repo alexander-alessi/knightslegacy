@@ -29,6 +29,22 @@ const ScholarshipDominic = ({ onNavigate }) => {
             The Dominic Paul Maron Ferrell Memorial Scholarship
           </h2>
           <div className="w-full h-px bg-gray-300"></div>
+
+          {/* Honorary Portrait */}
+          <div className="mt-10 flex justify-center px-4">
+            <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md">
+              <img
+                src="/assets/scholarships/dominic/dominic.png"
+                alt="Dominic Paul Maron Ferrell – In Loving Memory"
+                className="w-full h-auto aspect-square object-cover rounded-3xl border-8 border-llhs-gold/70 shadow-2xl"
+              />
+              <div className="absolute inset-0 rounded-3xl ring-4 ring-llhs-gold/30 ring-inset pointer-events-none"></div>
+            </div>
+          </div>
+
+          <p className="mt-4 text-sm italic text-gray-600 text-center max-w-md mx-auto px-4">
+            In loving memory of Dominic Paul Maron Ferrell
+          </p>
         </div>
 
         <div className="mt-12 text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">

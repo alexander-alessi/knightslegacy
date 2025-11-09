@@ -144,3 +144,7 @@ As long as you have the deploy.yml in place and properly configured, the automat
 
 **Alexander Alessi** – Developer  
 **Nicolas Alessi** – Developer
+
+## Live Site
+
+[https://knightslegacy.org](https://knightslegacy.org)

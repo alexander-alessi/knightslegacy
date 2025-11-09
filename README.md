@@ -43,3 +43,33 @@ npm install
 
 # Start the dev server
 npm run dev
+```
+
+## 2. Automated Deployment (GitHub Actions → AWS)
+
+Every push to the `main` branch automatically builds and deploys the site in under 60 seconds — no manual uploads ever again.
+
+### How it works
+- **Trigger**: `git push` to `main`  
+- **Build**: `npm install` → `npm run build` (Vite outputs to `dist/`)  
+- **Deploy**: Files are synced to an S3 bucket (website hosting enabled)  
+- **Cache bust**: CloudFront cache is invalidated (`/*`) so visitors instantly see the latest version
+
+### AWS Setup Summary
+1. **IAM OIDC Identity Provider**  
+   - Provider: GitHub (`token.actions.githubusercontent.com`)  
+   - Restricted to: `repo:alexander-alessi/knightslegacy:ref:refs/heads/main`
+
+2. **IAM Role** (`GitHub-KnightsLegacy`)  
+   - Trusted entity: The GitHub OIDC provider above  
+   - Permissions:  
+     - `s3:PutObject`, `s3:DeleteObject`, `s3:ListBucket` on the site bucket  
+     - `cloudfront:CreateInvalidation` on the CloudFront distribution
+
+3. **GitHub Actions Workflow**  
+   - File: `.github/workflows/deploy.yml`  
+   - Uses Node 22, `aws-actions/configure-aws-credentials@v4` with OIDC (no secrets stored)  
+   - Runs `aws s3 sync dist/ s3://<bucket> --delete`  
+   - Runs `aws cloudfront create-invalidation --distribution-id <id> --paths "/*"`
+
+**Result**: Zero-touch deploys. Commit → push → done. The live site updates worldwide in seconds.

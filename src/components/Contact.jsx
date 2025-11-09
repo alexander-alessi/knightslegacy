@@ -23,7 +23,7 @@ const Contact = () => {
         </div>
 
         <div className="mt-12 text-center space-y-6 text-lg">
-          <p className="text-gray-700">
+          <p>
             Have questions? We’d love to hear from you.<br />
           </p>
 

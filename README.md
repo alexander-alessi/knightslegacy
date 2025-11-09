@@ -139,3 +139,8 @@ As long as you have the deploy.yml in place and properly configured, the automat
    - Runs `aws cloudfront create-invalidation --distribution-id <id> --paths "/*"`
 
 **Result**: Zero-touch deploys. Commit → push → done. The live site updates worldwide in seconds.
+
+## Authors
+
+**Alexander Alessi** – Developer  
+**Nicolas Alessi** – Developer

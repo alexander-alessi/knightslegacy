@@ -14,9 +14,9 @@ const Scholarships = ({ onNavigate }) => {
   const [eventSponsors, setEventSponsors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [lightboxSrc, setLightboxSrc] = useState(null); // For lightbox
 
   useEffect(() => {
-    // Load both JSON files
     Promise.all([
       fetch('/data/sponsors.json').then(r => r.ok ? r.json() : []),
       fetch('/data/sponsors-event.json').then(r => r.ok ? r.json() : [])
@@ -30,12 +30,36 @@ const Scholarships = ({ onNavigate }) => {
         console.error('Failed to load sponsor data:', err);
         setError('Using fallback data');
         setLoading(false);
-        // Optional: fallback to hardcoded data
       });
   }, []);
 
+  // Open lightbox
+  const openLightbox = (src) => setLightboxSrc(src);
+  // Close lightbox
+  const closeLightbox = () => setLightboxSrc(null);
+
   return (
     <div className="max-w-5xl mx-auto space-y-12">
+
+      {/* Lightbox Overlay */}
+      {lightboxSrc && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 cursor-pointer"
+          onClick={closeLightbox}
+        >
+          <img
+            src={lightboxSrc}
+            alt="Enlarged sponsor logo"
+            className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+          />
+          <button
+            className="absolute top-6 right-6 text-white text-4xl font-light hover:text-llhs-gold transition"
+            aria-label="Close"
+          >
+            ×
+          </button>
+        </div>
+      )}
 
       {/* Our Scholarships */}
       <section className="bg-white p-10 rounded-3xl shadow-2xl">
@@ -138,11 +162,11 @@ const Scholarships = ({ onNavigate }) => {
                           </a>
                         </td>
                         <td className="py-6 px-6">
-                          <div className="w-24 h-24 mx-auto flex items-center justify-center">
+                          <div className="w-24 h-24 mx-auto flex items-center justify-center cursor-pointer" onClick={() => openLightbox(`/assets/partners/${p.slug}`)}>
                             <img
                               src={`/assets/partners/${p.slug}`}
                               alt={p.name}
-                              className="max-w-full max-h-full object-contain"
+                              className="max-w-full max-h-full object-contain hover:opacity-80 transition"
                             />
                           </div>
                         </td>
@@ -168,7 +192,7 @@ const Scholarships = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* Special Event Sponsors */}
+      {/* Special Event Sponsors – Now 3-Column Layout */}
       <section className="bg-white p-10 rounded-3xl shadow-2xl">
         <div className="max-w-5xl mx-auto">
           <div className="text-center">
@@ -192,7 +216,8 @@ const Scholarships = ({ onNavigate }) => {
                     <th className="py-4 px-6 text-sm font-semibold text-llhs-maroon uppercase tracking-wider">
                       Sponsor
                     </th>
-                    <th className="py-4 px-6 text-sm font-semibold text-llhs-maroon uppercase tracking-wider">
+                    <th className="py-4 px-6"></th>
+                    <th className="py-4 px-6 text-sm font-semibold text-llhs-maroon uppercase tracking-wider text-center">
                       Role
                     </th>
                   </tr>
@@ -201,7 +226,7 @@ const Scholarships = ({ onNavigate }) => {
                   {eventSponsors.length > 0 ? (
                     eventSponsors.map((s) => (
                       <tr key={s.slug} className="border-b border-gray-200 hover:bg-gray-50 transition">
-                        <td className="py-6 px-6 flex items-center gap-5">
+                        <td className="py-6 px-6">
                           <a
                             href={s.url}
                             target="_blank"
@@ -210,15 +235,17 @@ const Scholarships = ({ onNavigate }) => {
                           >
                             {s.name}
                           </a>
-                          <div className="w-24 h-24 flex-shrink-0">
+                        </td>
+                        <td className="py-6 px-6">
+                          <div className="w-24 h-24 mx-auto flex items-center justify-center cursor-pointer" onClick={() => openLightbox(`/assets/partners/${s.slug}`)}>
                             <img
                               src={`/assets/partners/${s.slug}`}
                               alt={s.name}
-                              className="w-full h-full object-contain"
+                              className="max-w-full max-h-full object-contain hover:opacity-80 transition"
                             />
                           </div>
                         </td>
-                        <td className="py-6 px-6">
+                        <td className="py-6 px-6 text-center">
                           <span className="inline-block px-3 py-1 text-sm font-medium text-llhs-maroon bg-llhs-gold/20 rounded-full">
                             {s.role}
                           </span>
@@ -227,7 +254,7 @@ const Scholarships = ({ onNavigate }) => {
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="2" className="py-8 text-center text-gray-500">
+                      <td colSpan="3" className="py-8 text-center text-gray-500">
                         No event sponsors listed yet.
                       </td>
                     </tr>

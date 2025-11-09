@@ -26,16 +26,16 @@ jobs:
         run: npm install
 
       - name: Build Vite site
-        run: npm run build  # Assumes the build script outputs to a 'dist' folder
+        run: npm run build
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::387151115005:role/GitHub-KnightsLegacy  # e.g., arn:aws:iam::123456789012:role/your-role-name
+          role-to-assume: arn:aws:iam::387151115005:role/GitHub-KnightsLegacy
           aws-region: us-east-1
 
       - name: Sync files to S3
-        run: aws s3 sync dist/ s3://knightslegacy --delete  # The --delete flag removes old files not in the new build
+        run: aws s3 sync dist/ s3://knightslegacy --delete
 
       - name: Invalidate CloudFront cache
         run: aws cloudfront create-invalidation --distribution-id E86UB0B4X6XFW --paths "/*"

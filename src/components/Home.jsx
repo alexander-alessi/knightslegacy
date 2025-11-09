@@ -68,7 +68,7 @@ const Home = ({ onNavigate }) => {
             Knights Legacy Fund
           </h1>
           <p className="text-lg md:text-2xl font-bold text-white drop-shadow-lg max-w-3xl">
-            Empowering Las Lomas graduates with scholarships for higher education, and beyond.
+            Empowering Las Lomas graduates with scholarships for higher education and beyond.
           </p>
         </div>
       </section>

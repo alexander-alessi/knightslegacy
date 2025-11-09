@@ -14,10 +14,11 @@ import { faHeart, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 const Footer = ({ onNavigate }) => {
   return (
-    <footer className="bg-white text-llhs-maroon py-8 mt-16 border-t border-llhs-gold">
+    <footer className="bg-white text-llhs-maroon py-4 mt-16 border-t border-llhs-gold">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-sm">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center text-sm">
 
+          {/* LEFT: Logo + Name + Copyright */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <button
               onClick={() => onNavigate('/')}
@@ -39,46 +40,45 @@ const Footer = ({ onNavigate }) => {
             </p>
           </div>
 
-          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
-
-            {/* Donate */}
+          {/* CENTER: Donate Button */}
+          <div className="flex justify-center">
             <button
               onClick={() => onNavigate('/donate')}
               className="inline-flex items-center gap-2 text-llhs-maroon hover:text-llhs-gold transition-colors"
             >
               <FontAwesomeIcon icon={faHeart} className="text-xl animate-pulse text-red-600" />
-              <span className="font-medium">Donate</span>
+              <span className="font-medium text-lg">Donate</span>
             </button>
+          </div>
 
-            {/* Instagram */}
+          {/* RIGHT: Icons Only (IG, LinkedIn, Contact) */}
+          <div className="flex justify-center md:justify-end gap-1">
             <a
               href="https://www.instagram.com/knights.legacy.fund/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-llhs-maroon hover:text-llhs-gold transition-colors"
+              aria-label="Instagram"
+              className="text-2xl text-llhs-maroon hover:text-llhs-gold transition-colors"
             >
-              <FontAwesomeIcon icon={faInstagram} className="text-xl" />
-              <span className="font-medium">@knights.legacy.fund</span>
+              <FontAwesomeIcon icon={faInstagram} />
             </a>
 
-            {/* LinkedIn */}
             <a
               href="https://www.linkedin.com/company/knights-legacy-fund/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-llhs-maroon hover:text-llhs-gold transition-colors"
+              aria-label="LinkedIn"
+              className="text-2xl text-llhs-maroon hover:text-llhs-gold transition-colors"
             >
-              <FontAwesomeIcon icon={faLinkedin} className="text-xl" />
-              <span className="font-medium">LinkedIn</span>
+              <FontAwesomeIcon icon={faLinkedin} />
             </a>
 
-            {/* Contact Us */}
             <button
               onClick={() => onNavigate('/contact')}
-              className="inline-flex items-center gap-2 text-llhs-maroon hover:text-llhs-gold transition-colors"
+              aria-label="Contact Us"
+              className="text-2xl text-llhs-maroon hover:text-llhs-gold transition-colors"
             >
-              <FontAwesomeIcon icon={faEnvelope} className="text-xl" />
-              <span className="font-medium">Contact Us</span>
+              <FontAwesomeIcon icon={faEnvelope} />
             </button>
           </div>
         </div>

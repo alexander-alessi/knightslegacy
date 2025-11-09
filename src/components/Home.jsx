@@ -15,6 +15,8 @@ const Home = ({ onNavigate }) => {
   const [raised, setRaised] = useState(0);
   const [goal, setGoal] = useState(50000);
   const [loading, setLoading] = useState(true);
+  const [donors, setDonors] = useState([]);
+  const [currentDonorIndex, setCurrentDonorIndex] = useState(0);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -51,6 +53,28 @@ const Home = ({ onNavigate }) => {
       }
     }
   }, [loading, error, percent]);
+
+  // Load donors + randomize
+  useEffect(() => {
+    fetch('/data/donors.json')
+      .then(res => res.ok ? res.json() : [])
+      .then(data => {
+        const shuffled = [...data].sort(() => Math.random() - 0.5);
+        setDonors(shuffled);
+      })
+      .catch(() => setDonors([]));
+  }, []);
+
+  // Cycle through donors
+  useEffect(() => {
+    if (donors.length === 0) return;
+
+    const interval = setInterval(() => {
+      setCurrentDonorIndex(prev => (prev + 1) % donors.length);
+    }, 3500); // 3.5 seconds per donor
+
+    return () => clearInterval(interval);
+  }, [donors]);
 
   return (
     <div className="space-y-16 max-w-5xl mx-auto">
@@ -89,12 +113,10 @@ const Home = ({ onNavigate }) => {
             </p>
           </div>
 
-          {/* Goal Label */}
           <div className="text-right text-sm font-medium text-gray-600 mb-2">
             2025 Goal: <span className="font-bold text-llhs-maroon">${goal.toLocaleString()}</span>
           </div>
 
-          {/* Progress Bar */}
           <div className="relative h-12 bg-white rounded-full overflow-hidden shadow-inner border-2 border-llhs-gold">
             <div
               className="progress-fill absolute inset-y-0 left-0 bg-llhs-maroon transition-all duration-[2200ms] ease-out flex items-center justify-end pr-6"
@@ -124,6 +146,24 @@ const Home = ({ onNavigate }) => {
               Donate today!
             </button>
           </p>
+
+          {/* Dynamic Donor Ticker */}
+          {donors.length > 0 && (
+            <div className="mt-10 text-center">
+              <p className="text-sm text-gray-600 mb-3">
+                Thank you to our generous supporters:
+              </p>
+              <div className="h-12 flex items-center justify-center">
+                <div className="inline-flex items-center gap-3 px-6 py-2 bg-gradient-to-r from-llhs-gold/10 via-llhs-gold/20 to-llhs-gold/10 rounded-full shadow-inner animate-fade">
+                  <span className="text-xl animate-ping inline-block opacity-70">✨</span>
+                  <p className="text-sm font-medium text-llhs-maroon tracking-wide">
+                    {donors[currentDonorIndex]?.name || '...'}
+                  </p>
+                  <span className="text-xl animate-ping inline-block opacity-70">✨</span>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 

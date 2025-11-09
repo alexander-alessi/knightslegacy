@@ -49,3 +49,12 @@
 .animate-grow-to-end {
   animation: grow-to-end 2s ease-out forwards;
 }
+
+/* Fade-in and upward movement animation (e.g., text reveals, notifications) */
+@keyframes fade {
+  0%, 100% { opacity: 0; transform: translateY(8px); }
+  20%, 80% { opacity: 1; transform: translateY(0); }
+}
+.animate-fade {
+  animation: fade 3.5s ease-in-out infinite;
+}

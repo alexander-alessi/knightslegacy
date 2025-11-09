@@ -14,7 +14,7 @@ Founded in 2025 by a group of passionate seniors, we award **life-changing schol
 
 ## Features
 
-- **Live Progress Tracker** – See how close we are to our $50,000 goal  
+- **Live Progress Tracker** – See how close we are to our goal  
 - **Scholarship Details** – Learn about our awards and application process  
 - **Meet the Team** – Executive Board + Chair Members with photos and bios  
 - **Memorial Scholarship** – Dedicated page for Dominic Paul Maron Ferrell  
@@ -44,31 +44,97 @@ npm install
 # Start the dev server
 npm run dev
 ```
+Now you should be able to view the local development server in a web browser at https://localhost:5173
 
 ### 2. Automated Deployment (GitHub Actions → AWS)
 
-Every push to the `main` branch automatically builds and deploys the site in under 60 seconds — no manual uploads ever again.
+Every push to the `main` branch automatically builds and deploys the site in about 30 seconds. Ensure that <repo>/.github/workflows/deploy.yml is in place to activate the GitHub actions.
 
 #### How it works
 - **Trigger**: `git push` to `main`  
 - **Build**: `npm install` → `npm run build` (Vite outputs to `dist/`)  
-- **Deploy**: Files are synced to an S3 bucket (website hosting enabled)  
+- **Deploy**: Files are synced to the S3 bucket  
 - **Cache bust**: CloudFront cache is invalidated (`/*`) so visitors instantly see the latest version
 
 #### AWS Setup Summary
 1. **IAM OIDC Identity Provider**  
-   - Provider: GitHub (`token.actions.githubusercontent.com`)  
-   - Restricted to: `repo:alexander-alessi/knightslegacy:ref:refs/heads/main`
+   - Provider: `https://token.actions.githubusercontent.com`
+   - Audience: `sts.amazonaws.com`
 
-2. **IAM Role** (`GitHub-KnightsLegacy`)  
-   - Trusted entity: The GitHub OIDC provider above  
-   - Permissions:  
-     - `s3:PutObject`, `s3:DeleteObject`, `s3:ListBucket` on the site bucket  
-     - `cloudfront:CreateInvalidation` on the CloudFront distribution
+2. **IAM Role** (`GitHub-KnightsLegacy`) - Trust relationship (Web identity)
+    - Trusted entity type: `Web identity`
+    - Identity provider: `token.actions.githubusercontent.com`
+    - Audience: `sts.amazonaws.com`
+    - GitHub organization: `<github_username>`
+    - Github repository: `<github_repo>`
+    - Github branch: `main`
 
-3. **GitHub Actions Workflow**  
-   - File: `.github/workflows/deploy.yml`  
-   - Uses Node 22, `aws-actions/configure-aws-credentials@v4` with OIDC (no secrets stored)  
+This should produce the following JSON automatically:
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Federated": "<ARN_of_OIDC_Provider"
+            },
+            "Action": "sts:AssumeRoleWithWebIdentity",
+            "Condition": {
+                "StringEquals": {
+                    "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+                },
+                "StringLike": {
+                    "token.actions.githubusercontent.com:sub": "repo:<github_username>/<github_repo>:ref:refs/heads/main"
+                }
+            }
+        }
+    ]
+}
+```
+
+3. **IAM Role** (`GitHub-KnightsLegacy`) - InlinePolicy (KnightsLegacy-CF-Access) 
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "cloudfront:CreateInvalidation",
+            "Resource": "<CloudFront_ARN>"
+        }
+    ]
+}
+```
+
+4. **IAM Role** (`GitHub-KnightsLegacy`) - InlinePolicy (KnightsLegacy-S3-Access) 
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject",
+                "s3:DeleteObject",
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::<S3_Bucket_Name>",
+                "arn:aws:s3:::<S3_Bucket_Name>/*"
+            ]
+        }
+    ]
+}
+```
+
+4. **GitHub Actions Workflow**  
+
+As long as you have the deploy.yml in place and properly configured, the automated pushes should work on every checking to `main` as follows:
+
    - Runs `aws s3 sync dist/ s3://<bucket> --delete`  
    - Runs `aws cloudfront create-invalidation --distribution-id <id> --paths "/*"`
 

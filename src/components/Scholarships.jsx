@@ -192,7 +192,7 @@ const Scholarships = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* Special Event Sponsors – Now 3-Column Layout */}
+      {/* Special Event Sponsors */}
       <section className="bg-white p-10 rounded-3xl shadow-2xl">
         <div className="max-w-5xl mx-auto">
           <div className="text-center">

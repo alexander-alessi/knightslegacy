@@ -45,17 +45,17 @@ npm install
 npm run dev
 ```
 
-## 2. Automated Deployment (GitHub Actions → AWS)
+### 2. Automated Deployment (GitHub Actions → AWS)
 
 Every push to the `main` branch automatically builds and deploys the site in under 60 seconds — no manual uploads ever again.
 
-### How it works
+#### How it works
 - **Trigger**: `git push` to `main`  
 - **Build**: `npm install` → `npm run build` (Vite outputs to `dist/`)  
 - **Deploy**: Files are synced to an S3 bucket (website hosting enabled)  
 - **Cache bust**: CloudFront cache is invalidated (`/*`) so visitors instantly see the latest version
 
-### AWS Setup Summary
+#### AWS Setup Summary
 1. **IAM OIDC Identity Provider**  
    - Provider: GitHub (`token.actions.githubusercontent.com`)  
    - Restricted to: `repo:alexander-alessi/knightslegacy:ref:refs/heads/main`

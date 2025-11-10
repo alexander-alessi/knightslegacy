@@ -61,7 +61,7 @@ const Donate = () => {
 
               <div className="text-center space-y-4">
                 <a
-                  href="venmo://pay?txn=pay&recipients=KnightsLegacy"
+                  href="https://venmo.com/u/KnightsLegacy?txn=pay"
                   className="inline-block bg-llhs-maroon text-white font-bold py-4 px-10 rounded-full hover:bg-llhs-maroon/90 transition shadow-lg"
                 >
                   Open in Venmo App

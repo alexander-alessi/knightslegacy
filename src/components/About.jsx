@@ -8,6 +8,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import PersonCard from './PersonCard';
 
 const About = () => {
   const [exec, setExec] = useState([]);
@@ -31,33 +32,6 @@ const About = () => {
         setLoading(false);
       });
   }, []);
-
-  const PersonCard = ({ name, role, slug, responsibilities, about }) => (
-    <div className="flex flex-col items-center text-center">
-      <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-llhs-gold mb-4 shadow-lg">
-        <img
-          src={`/assets/headshots/${slug}`}
-          alt={name}
-          className="w-full h-full object-cover"
-        />
-      </div>
-      <h3 className="text-xl font-bold text-llhs-maroon">{name}</h3>
-      <p className="text-sm text-gray-600 mb-8">{role}</p>
-
-      <div className="w-full max-w-xs p-4 rounded-lg border border-llhs-gold/30 bg-gray-100">
-        <div className="space-y-4 text-center text-sm">
-          <div>
-            <p className="font-semibold text-llhs-maroon mb-1">Responsibilities</p>
-            <p className="text-gray-700 leading-relaxed">{responsibilities}</p>
-          </div>
-          <div>
-            <p className="font-semibold text-llhs-maroon mb-1">About Me</p>
-            <p className="text-gray-700 leading-relaxed italic">{about}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
 
   return (
     <div className="max-w-7xl mx-auto space-y-12">
@@ -90,7 +64,7 @@ const About = () => {
 
       {/* Executive Board Members */}
       <section className="bg-white p-10 rounded-3xl shadow-2xl">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div className="text-center">
             <h2 className="text-4xl font-bold text-llhs-maroon mb-6 uppercase tracking-wider">
               Executive Board Members
@@ -99,13 +73,13 @@ const About = () => {
           </div>
 
           {loading && !exec.length ? (
-            <p className="text-center py-8 text-gray-500">Loading executives…</p>
+            <p className="text-center py-12 text-gray-500">Loading executives…</p>
           ) : (
-            <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-12">
               {exec.length > 0 ? (
                 exec.map((p) => <PersonCard key={p.name} {...p} />)
               ) : (
-                <p className="col-span-full text-center text-gray-500">No executives listed.</p>
+                <p className="col-span-2 text-center text-gray-500">No executives listed.</p>
               )}
             </div>
           )}
@@ -114,7 +88,7 @@ const About = () => {
 
       {/* Chair Members */}
       <section className="bg-white p-10 rounded-3xl shadow-2xl">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div className="text-center">
             <h2 className="text-4xl font-bold text-llhs-maroon mb-6 uppercase tracking-wider">
               Chair Members
@@ -123,13 +97,13 @@ const About = () => {
           </div>
 
           {loading && !chairs.length ? (
-            <p className="text-center py-8 text-gray-500">Loading chairs…</p>
+            <p className="text-center py-12 text-gray-500">Loading chairs…</p>
           ) : (
-            <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-12">
               {chairs.length > 0 ? (
                 chairs.map((p) => <PersonCard key={p.name} {...p} />)
               ) : (
-                <p className="col-span-full text-center text-gray-500">No chairs listed.</p>
+                <p className="col-span-2 text-center text-gray-500">No chairs listed.</p>
               )}
             </div>
           )}

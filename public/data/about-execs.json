@@ -3,35 +3,71 @@
     "name": "Mason Grant",
     "role": "President",
     "slug": "headshot-mason.jpeg",
-    "responsibilities": "Founded the Knights Legacy Fund and leads the executive team in strategy and vision.",
-    "about": "I started this after seeing teammates held back by cost. I believe in opportunity through teamwork. Every scholarship we give proves what’s possible when we work together."
+    "responsibilities": [
+      "Founded the Knights Legacy Fund",
+      "Leads executive team in strategy and vision"
+    ],
+    "about": "I started this after seeing teammates held back by cost. I believe in opportunity through teamwork. Every scholarship we give proves what’s possible when we work together.",
+    "contact": {
+      "linkedin": "https://www.linkedin.com/in/mason-grant-916970321/",
+      "email": ""
+    }
   },
   {
     "name": "Eva Murallo",
     "role": "Vice President",
     "slug": "headshot-eva.png",
-    "responsibilities": "Supports the President, oversees committees, and ensures smooth communication across teams.",
-    "about": "I’m Editor-in-Chief of the yearbook and play softball and tennis. I love bringing people together. This role lets me use leadership to help students reach their goals."
+    "responsibilities": [
+      "Supports the President",
+      "Oversees committees",
+      "Ensures smooth communication across teams"
+    ],
+    "about": "I’m Editor-in-Chief of the yearbook and play softball and tennis. I love bringing people together. This role lets me use leadership to help students reach their goals.",
+    "contact": {
+      "linkedin": "https://www.linkedin.com/in/eva-murallo-a16b2736b/",
+      "email": ""
+    }
   },
   {
     "name": "Alex Alessi",
     "role": "Treasurer",
     "slug": "headshot-alex.png",
-    "responsibilities": "Manages all financial records, budgets, donations, and tax documents with precision.",
-    "about": "I run multiple businesses outside of school. I know how important every dollar is. I make sure our funds are used wisely to support as many students as possible."
+    "responsibilities": [
+      "Manages all financial records and budgets",
+      "Handles donations and tax documents with precision"
+    ],
+    "about": "I run multiple businesses outside of school. I know how important every dollar is. I make sure our funds are used wisely to support as many students as possible.",
+    "contact": {
+      "linkedin": "https://www.linkedin.com/in/alex-alessi-ab511a21/",
+      "email": "alexander.q.alessi@gmail.com"
+    }
   },
   {
     "name": "Nicolas Alessi",
     "role": "Secretary",
     "slug": "headshot-nico.png",
-    "responsibilities": "Maintains meeting minutes, official records, and board communication schedules.",
-    "about": "I'm an entrepreneur and product manager and I love systems that are designed well and just work. Helping students succeed is what drives me to stay detail-oriented."
+    "responsibilities": [
+      "Maintains meeting minutes and official records",
+      "Manages board communication and schedules"
+    ],
+    "about": "I'm an entrepreneur and product manager and I love systems that are designed well and just work. Helping students succeed is what drives me to stay detail-oriented.",
+    "contact": {
+      "linkedin": "https://www.linkedin.com/in/nicolas-alessi-05111b21/",
+      "email": "nicolas.g.alessi@gmail.com"
+    }
   },
   {
     "name": "Amanda Loar",
     "role": "Head of Marketing",
     "slug": "headshot-amanda.png",
-    "responsibilities": "Creates marketing campaigns and promotions to grow awareness and donor support.",
-    "about": "I play soccer and love telling stories that matter. I bring that energy to our mission. Every post, event, and message is a chance to inspire action."
+    "responsibilities": [
+      "Creates marketing campaigns and promotions",
+      "Grows awareness and donor support"
+    ],
+    "about": "I play soccer and love telling stories that matter. I bring that energy to our mission. Every post, event, and message is a chance to inspire action.",
+    "contact": {
+      "linkedin": "https://www.linkedin.com/in/amanda-loar-a7895b36b/",
+      "email": ""
+    }
   }
 ]

@@ -141,8 +141,8 @@ const Scholarships = ({ onNavigate }) => {
                             <FontAwesomeIcon icon={faExternalLinkAlt} size="xs" className="opacity-70 ml-1" />
                           </a>
                         </td>
-                        <td className="py-6 px-6">
-                          <div className="w-24 h-24 mx-auto flex items-center justify-center">
+                        <td className="py-4 px-3">
+                          <div className="w-32 h-32 mx-auto flex items-center justify-center">
                             <img
                               src={`/assets/partners/${p.slug}`}
                               alt={p.name}
@@ -217,8 +217,8 @@ const Scholarships = ({ onNavigate }) => {
                             <FontAwesomeIcon icon={faExternalLinkAlt} size="xs" className="opacity-70 ml-1" />
                           </a>
                         </td>
-                        <td className="py-6 px-6">
-                          <div className="w-24 h-24 mx-auto flex items-center justify-center">
+                        <td className="py-4 px-3">
+                          <div className="w-32 h-32 mx-auto flex items-center justify-center">
                             <img
                               src={`/assets/partners/${p.slug}`}
                               alt={p.name}
@@ -293,8 +293,8 @@ const Scholarships = ({ onNavigate }) => {
                             <FontAwesomeIcon icon={faExternalLinkAlt} size="xs" className="opacity-70 ml-1" />
                           </a>
                         </td>
-                        <td className="py-6 px-6">
-                          <div className="w-24 h-24 mx-auto flex items-center justify-center">
+                        <td className="py-4 px-3">
+                          <div className="w-32 h-32 mx-auto flex items-center justify-center">
                             <img
                               src={`/assets/partners/${s.slug}`}
                               alt={s.name}

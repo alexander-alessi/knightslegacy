@@ -73,7 +73,7 @@ const Scholarships = ({ onNavigate }) => {
               Dominic Paul Maron Ferrell Memorial Scholarship
             </h3>
             <p className="text-sm text-gray-600 mb-4">
-              <strong>Award:</strong> $10,000 – $15,000
+              <strong>Award:</strong> $5,000 – $10,000
             </p>
             <p className="text-gray-700 leading-relaxed flex-grow">
               Honors a beloved community member. Awarded to a student who embodies kindness, perseverance, and service to others.

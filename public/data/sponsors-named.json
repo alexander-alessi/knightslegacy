@@ -1,20 +1,14 @@
 [
   {
     "name": "Pan Coast Pizza",
-    "tier": "Gold",
+    "amount": "5000",
     "slug": "pan-coast-pizza.png",
     "url": "https://pancoastpizza.com/"
   },
   {
     "name": "Bedell Frazier",
-    "tier": "Gold",
+    "amount": "5000",
     "slug": "bedell-frazier.png",
     "url": "https://bedellfrazier.com/"
-  },
-  {
-    "name": "F&M Bank",
-    "tier": "Bronze",
-    "slug": "fm-bank.png",
-    "url": "https://www.fmbonline.com/"
   }
 ]

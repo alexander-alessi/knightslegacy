@@ -8,22 +8,26 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Scholarships = ({ onNavigate }) => {
-  const [partners, setPartners] = useState([]);
+  const [sponsorsPartners, setSponsorsPartners] = useState([]);
   const [eventSponsors, setEventSponsors] = useState([]);
+  const [namedPartners, setNamedPartners] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [lightboxSrc, setLightboxSrc] = useState(null); // For lightbox
 
   useEffect(() => {
     Promise.all([
-      fetch('/data/sponsors.json').then(r => r.ok ? r.json() : []),
-      fetch('/data/sponsors-event.json').then(r => r.ok ? r.json() : [])
+      fetch('/data/sponsors-partners.json').then(r => r.ok ? r.json() : []),
+      fetch('/data/sponsors-event.json').then(r => r.ok ? r.json() : []),
+      fetch('/data/sponsors-named.json').then(r => r.ok ? r.json() : [])
     ])
-      .then(([partnersData, eventData]) => {
-        setPartners(partnersData);
+      .then(([partnersData, eventData, namedData]) => {
+        setSponsorsPartners(partnersData);
         setEventSponsors(eventData);
+        setNamedPartners(namedData);
         setLoading(false);
       })
       .catch(err => {
@@ -33,33 +37,8 @@ const Scholarships = ({ onNavigate }) => {
       });
   }, []);
 
-  // Open lightbox
-  const openLightbox = (src) => setLightboxSrc(src);
-  // Close lightbox
-  const closeLightbox = () => setLightboxSrc(null);
-
   return (
     <div className="max-w-5xl mx-auto space-y-12">
-
-      {/* Lightbox Overlay */}
-      {lightboxSrc && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 cursor-pointer"
-          onClick={closeLightbox}
-        >
-          <img
-            src={lightboxSrc}
-            alt="Enlarged sponsor logo"
-            className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
-          />
-          <button
-            className="absolute top-6 right-6 text-white text-4xl font-light hover:text-llhs-gold transition"
-            aria-label="Close"
-          >
-            ×
-          </button>
-        </div>
-      )}
 
       {/* Our Scholarships */}
       <section className="bg-white p-10 rounded-3xl shadow-2xl">
@@ -94,7 +73,7 @@ const Scholarships = ({ onNavigate }) => {
               Dominic Paul Maron Ferrell Memorial Scholarship
             </h3>
             <p className="text-sm text-gray-600 mb-4">
-              <strong>Award:</strong> $2,500
+              <strong>Award:</strong> $10,000 – $15,000
             </p>
             <p className="text-gray-700 leading-relaxed flex-grow">
               Honors a beloved community member. Awarded to a student who embodies kindness, perseverance, and service to others.
@@ -117,7 +96,83 @@ const Scholarships = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* Our Scholarship Partners */}
+      {/* Named Scholarship Partners */}
+      <section className="bg-white p-10 rounded-3xl shadow-2xl">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center">
+            <h2 className="text-4xl font-bold text-llhs-maroon mb-6 uppercase tracking-wider">
+              Named Scholarship Partners
+            </h2>
+            <div className="w-full h-px bg-gray-300"></div>
+          </div>
+
+          <p className="mt-12 text-center text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
+            These generous partners have committed to fully funding named scholarships, creating lasting impact for Las Lomas students.
+          </p>
+
+          <div className="mt-12 overflow-x-auto">
+            {loading && !namedPartners.length ? (
+              <p className="text-center py-8 text-gray-500">Loading named partners...</p>
+            ) : (
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b-2 border-llhs-gold">
+                    <th className="py-4 px-6 text-sm font-semibold text-llhs-maroon uppercase tracking-wider">
+                      Partner
+                    </th>
+                    <th className="py-4 px-6"></th>
+                    <th className="py-4 px-6 text-sm font-semibold text-llhs-maroon uppercase tracking-wider text-center">
+                      Amount
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {namedPartners.length > 0 ? (
+                    namedPartners.map((p) => (
+                      <tr key={p.slug} className="border-b border-gray-200 hover:bg-gray-50 transition">
+                        <td className="py-6 px-6">
+                          <a
+                            href={p.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-bold text-llhs-maroon hover:text-llhs-gold hover:underline transition-all duration-200"
+                          >
+                            {p.name}
+                            <FontAwesomeIcon icon={faExternalLinkAlt} size="xs" className="opacity-70 ml-1" />
+                          </a>
+                        </td>
+                        <td className="py-6 px-6">
+                          <div className="w-24 h-24 mx-auto flex items-center justify-center">
+                            <img
+                              src={`/assets/partners/${p.slug}`}
+                              alt={p.name}
+                              className="max-w-full max-h-full object-contain"
+                            />
+                          </div>
+                        </td>
+                        <td className="py-6 px-6 text-center">
+                          <span className="inline-block px-3 py-1 text-sm font-medium text-llhs-maroon bg-llhs-gold/20 rounded-full">
+                            ${parseInt(p.amount).toLocaleString()}
+                          </span>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="3" className="py-8 text-center text-gray-500">
+                        No named partners listed yet.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            )}
+            {error && <p className="text-center text-sm text-red-600 mt-2">{error}</p>}
+          </div>
+        </div>
+      </section>
+
+      {/* Scholarship Partners */}
       <section className="bg-white p-10 rounded-3xl shadow-2xl">
         <div className="max-w-5xl mx-auto">
           <div className="text-center">
@@ -128,11 +183,11 @@ const Scholarships = ({ onNavigate }) => {
           </div>
 
           <p className="mt-12 text-center text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
-            The Knights Legacy Fund grows because of our awesome community and partners. We couldn’t do it without their amazing support and dedication. They make everything we do possible. Join our partners to help us keep going strong!
+            Every scholarship we give is made possible by our incredible Scholarship Partners. Their support — at every level — is the heartbeat of the Knights Legacy Fund. Thank you for believing in our students. Ready to join them?
           </p>
 
           <div className="mt-12 overflow-x-auto">
-            {loading && !partners.length ? (
+            {loading && !sponsorsPartners.length ? (
               <p className="text-center py-8 text-gray-500">Loading partners...</p>
             ) : (
               <table className="w-full text-left border-collapse">
@@ -148,8 +203,8 @@ const Scholarships = ({ onNavigate }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {partners.length > 0 ? (
-                    partners.map((p) => (
+                  {sponsorsPartners.length > 0 ? (
+                    sponsorsPartners.map((p) => (
                       <tr key={p.slug} className="border-b border-gray-200 hover:bg-gray-50 transition">
                         <td className="py-6 px-6">
                           <a
@@ -159,14 +214,15 @@ const Scholarships = ({ onNavigate }) => {
                             className="font-bold text-llhs-maroon hover:text-llhs-gold hover:underline transition-all duration-200"
                           >
                             {p.name}
+                            <FontAwesomeIcon icon={faExternalLinkAlt} size="xs" className="opacity-70 ml-1" />
                           </a>
                         </td>
                         <td className="py-6 px-6">
-                          <div className="w-24 h-24 mx-auto flex items-center justify-center cursor-pointer" onClick={() => openLightbox(`/assets/partners/${p.slug}`)}>
+                          <div className="w-24 h-24 mx-auto flex items-center justify-center">
                             <img
                               src={`/assets/partners/${p.slug}`}
                               alt={p.name}
-                              className="max-w-full max-h-full object-contain hover:opacity-80 transition"
+                              className="max-w-full max-h-full object-contain"
                             />
                           </div>
                         </td>
@@ -234,14 +290,15 @@ const Scholarships = ({ onNavigate }) => {
                             className="font-bold text-llhs-maroon hover:text-llhs-gold hover:underline transition-all duration-200"
                           >
                             {s.name}
+                            <FontAwesomeIcon icon={faExternalLinkAlt} size="xs" className="opacity-70 ml-1" />
                           </a>
                         </td>
                         <td className="py-6 px-6">
-                          <div className="w-24 h-24 mx-auto flex items-center justify-center cursor-pointer" onClick={() => openLightbox(`/assets/partners/${s.slug}`)}>
+                          <div className="w-24 h-24 mx-auto flex items-center justify-center">
                             <img
                               src={`/assets/partners/${s.slug}`}
                               alt={s.name}
-                              className="max-w-full max-h-full object-contain hover:opacity-80 transition"
+                              className="max-w-full max-h-full object-contain"
                             />
                           </div>
                         </td>

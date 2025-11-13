@@ -19,10 +19,12 @@ import Donate from './components/Donate';
 import Faq from './components/Faq';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import NotFound from './components/NotFound';
 
 const App = () => {
   const navigate = useNavigate();
 
+  // Scroll to top on route change
   const handleNavigate = (path) => {
     navigate(path);
     window.scrollTo(0, 0);
@@ -41,6 +43,7 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/donate" element={<Donate />} />
           <Route path="/faq" element={<Faq onNavigate={handleNavigate} />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
 

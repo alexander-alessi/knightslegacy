@@ -91,7 +91,7 @@ const Scholarships = ({ onNavigate }) => {
 
         <div className="mt-12 text-center">
           <p className="text-lg text-gray-700">
-            Applications open in <strong>early spring</strong>. Details announced via the Las Lomas Career Center and our website.
+            Applications open <strong>December 1st</strong>. Details announced via the Las Lomas Career Center and our website.
           </p>
         </div>
       </section>

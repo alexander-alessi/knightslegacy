@@ -82,6 +82,19 @@ const Donate = () => {
               </div>
             </div>
           </div>
+
+          <div className="mt-8 text-center">
+            <p className="text-gray-700">
+              If you want to pay by check, please{' '}
+              <a
+                href="/contact"
+                className="text-llhs-maroon underline hover:text-llhs-gold font-semibold"
+              >
+                contact us
+              </a>{' '}
+              for details.
+            </p>
+          </div>
         </div>
       </section>
 

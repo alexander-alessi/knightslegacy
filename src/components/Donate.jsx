@@ -83,16 +83,16 @@ const Donate = () => {
             </div>
           </div>
 
-          <div className="mt-8 text-center">
-            <p className="text-gray-700">
-              If you want to pay by check, please{' '}
+          <div className="mt-8 bg-llhs-gold/10 p-6 rounded-xl border-2 border-llhs-gold">
+            <p className="text-center text-lg text-gray-800">
+              <strong className="text-llhs-maroon">Prefer to donate by check?</strong> This is our preferred method as 100% of your donation goes directly to scholarships (no ~3% vendor fees).{' '}
               <a
                 href="/contact"
                 className="text-llhs-maroon underline hover:text-llhs-gold font-semibold"
               >
-                contact us
+                Contact us
               </a>{' '}
-              for details.
+              for details—we can arrange pick-up!
             </p>
           </div>
         </div>

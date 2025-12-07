@@ -14,6 +14,7 @@ import Home from './components/Home';
 import About from './components/About';
 import Scholarships from './components/Scholarships';
 import ScholarshipDominic from './components/ScholarshipDominic';
+import Application from './components/Application';
 import Contact from './components/Contact';
 import Donate from './components/Donate';
 import Faq from './components/Faq';
@@ -40,6 +41,7 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/scholarships" element={<Scholarships onNavigate={handleNavigate} />} />
           <Route path="/scholarships/dominic" element={<ScholarshipDominic onNavigate={handleNavigate} />} />
+          <Route path="/application" element={<Application />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/donate" element={<Donate />} />
           <Route path="/faq" element={<Faq onNavigate={handleNavigate} />} />

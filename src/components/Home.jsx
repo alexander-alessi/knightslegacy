@@ -16,6 +16,7 @@ const Home = ({ onNavigate }) => {
   const [donors, setDonors] = useState([]);
   const [currentDonorIndex, setCurrentDonorIndex] = useState(0);
   const [error, setError] = useState(null);
+  const [applicationEnabled, setApplicationEnabled] = useState(false);
 
   useEffect(() => {
     fetch('/data/fund.json')
@@ -39,6 +40,14 @@ const Home = ({ onNavigate }) => {
   }, []);
 
   const percent = goal > 0 ? Math.round((raised / goal) * 100) : 0;
+
+  // Load application status
+  useEffect(() => {
+    fetch('/data/application.json')
+      .then(res => res.ok ? res.json() : { enabled: false })
+      .then(data => setApplicationEnabled(data.enabled || false))
+      .catch(() => setApplicationEnabled(false));
+  }, []);
 
   // Animate progress bar after data loads
   useEffect(() => {
@@ -76,6 +85,24 @@ const Home = ({ onNavigate }) => {
 
   return (
     <div className="space-y-16 max-w-5xl mx-auto">
+
+      {/* APPLICATION LINK */}
+      {applicationEnabled && (
+        <section className="bg-llhs-maroon p-6 rounded-3xl shadow-2xl text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+            🎓 Scholarship Applications Now Open!
+          </h2>
+          <p className="text-white/90 mb-4">
+            Apply now for a Knights Legacy Fund scholarship
+          </p>
+          <button
+            onClick={() => onNavigate('/application')}
+            className="bg-white text-llhs-maroon font-bold py-3 px-8 rounded-full hover:bg-llhs-gold hover:text-white transition-all shadow-lg"
+          >
+            Apply Now
+          </button>
+        </section>
+      )}
 
       {/* HERO IMAGE */}
       <section className="relative h-[500px] md:h-[600px] max-h-[600px] rounded-3xl overflow-hidden shadow-2xl">

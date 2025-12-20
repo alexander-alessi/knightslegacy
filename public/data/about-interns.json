@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Paige Loleiger",
+    "role": "Junior Intern",
+    "slug": "headshot-paige.png",
+    "responsibilities": [
+      "Shadows Marketing & Communications Chair",
+      "Assists with social media content and donor outreach"
+    ],
+    "about": "I love playing softball, flag football, and I’m a third generation knight. I’m really excited about helping Las Lomas students and creating community connections.",
+    "contact": {
+      "linkedin": "",
+      "email": ""
+    }
+  },
+  {
+    "name": "Lexie Kou",
+    "role": "Junior Intern",
+    "slug": "headshot-lexie.png",
+    "responsibilities": [
+      "Shadows Event Planning Chair",
+      "Supports fundraising event coordination and logistics"
+    ],
+    "about": "I am a junior, and I love to play sports. I aim to plan and organize events that will unite our community. I look forward to helping students achieve their goals.",
+    "contact": {
+      "linkedin": "",
+      "email": ""
+    }
+  },
+  {
+    "name": "Molly Petry",
+    "role": "Junior Intern",
+    "slug": "headshot-molly.png",
+    "responsibilities": [
+      "Shadows Community & Business Fundraising Chair",
+      "Assists with local business outreach and partnership development"
+    ],
+    "about": "I’m a junior at Las Lomas and I’m really passionate about helping the people around me. I’m super excited to help students achieve their dreams.",
+    "contact": {
+      "linkedin": "",
+      "email": ""
+    }
+  }
+]

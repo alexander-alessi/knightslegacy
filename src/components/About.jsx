@@ -13,17 +13,20 @@ import PersonCard from './PersonCard';
 const About = () => {
   const [exec, setExec] = useState([]);
   const [chairs, setChairs] = useState([]);
+  const [interns, setInterns] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     Promise.all([
       fetch('/data/about-execs.json').then(r => r.ok ? r.json() : []),
-      fetch('/data/about-chairs.json').then(r => r.ok ? r.json() : [])
+      fetch('/data/about-chairs.json').then(r => r.ok ? r.json() : []),
+      fetch('/data/about-interns.json').then(r => r.ok ? r.json() : [])
     ])
-      .then(([execData, chairsData]) => {
+      .then(([execData, chairsData, internsData]) => {
         setExec(execData);
         setChairs(chairsData);
+        setInterns(internsData);
         setLoading(false);
       })
       .catch(err => {
@@ -104,6 +107,36 @@ const About = () => {
                 chairs.map((p) => <PersonCard key={p.name} {...p} />)
               ) : (
                 <p className="col-span-2 text-center text-gray-500">No chairs listed.</p>
+              )}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Junior Interns */}
+      <section className="bg-white p-10 rounded-3xl shadow-2xl">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center">
+            <h2 className="text-4xl font-bold text-llhs-maroon mb-6 uppercase tracking-wider">
+              Junior Interns
+            </h2>
+            <div className="w-full h-px bg-gray-300"></div>
+          </div>
+
+          <div className="mt-8 text-center">
+            <p className="text-lg text-gray-700 italic">
+              Training the next generation of Knights Legacy Fund leaders
+            </p>
+          </div>
+
+          {loading && !interns.length ? (
+            <p className="text-center py-12 text-gray-500">Loading interns…</p>
+          ) : (
+            <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-12">
+              {interns.length > 0 ? (
+                interns.map((p) => <PersonCard key={p.name} {...p} />)
+              ) : (
+                <p className="col-span-2 text-center text-gray-500">No interns listed.</p>
               )}
             </div>
           )}

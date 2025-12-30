@@ -4,22 +4,22 @@
   },
 	{
     "name": "Bedell Frazier"
-  },
+	},
 	{
-    "name": "F&M Bank"
-  },
+		"name": "F&M Bank"
+	},
 	{
-    "name": "Mike Hess Brewing"
-  },
-  {
-    "name": "Tom & Christina Alessi"
-  },
-  {
-    "name": "Doug & Katy Grant"
-  },
-  {
-    "name": "Linda Strangio"
-  },
+		"name": "Mike Hess Brewing"
+	},
+	{
+		"name": "Tom & Christina Alessi"
+	},
+	{
+		"name": "Doug & Katy Grant"
+	},
+	{
+		"name": "Linda Strangio"
+	},
 	{
 		"name": "Mike & Marla Loar"
 	},
@@ -76,5 +76,11 @@
 	},
 	{
 		"name": "Tim Netherton"
+	},
+	{
+		"name": "Renee White"
+	},
+	{
+		"name": "Carissa Brikken"
 	}
 ]

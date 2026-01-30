@@ -4,5 +4,11 @@
     "tier": "Bronze",
     "slug": "fm-bank.png",
     "url": "https://www.fmbonline.com/"
+  },
+  {
+    "name": "XYZ",
+    "tier": "Silver",
+    "slug": "xyz.png",
+    "url": "https://wearexyz.com/"
   }
 ]

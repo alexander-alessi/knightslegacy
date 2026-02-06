@@ -10,5 +10,11 @@
     "tier": "Silver",
     "slug": "xyz.png",
     "url": "https://wearexyz.com/"
+  },
+  {
+    "name": "Hicks Professional Group",
+    "tier": "Bronz",
+    "slug": "hicks.png",
+    "url": "https://hickspro.com/"
   }
 ]

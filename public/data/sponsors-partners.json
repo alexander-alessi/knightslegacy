@@ -1,15 +1,15 @@
 [
   {
-    "name": "F&M Bank",
-    "tier": "Bronze",
-    "slug": "fm-bank.png",
-    "url": "https://www.fmbonline.com/"
-  },
-  {
     "name": "XYZ",
     "tier": "Silver",
     "slug": "xyz.png",
     "url": "https://wearexyz.com/"
+  },
+  {
+    "name": "F&M Bank",
+    "tier": "Bronze",
+    "slug": "fm-bank.png",
+    "url": "https://www.fmbonline.com/"
   },
   {
     "name": "Hicks Professional Group",

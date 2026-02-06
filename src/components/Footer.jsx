@@ -4,7 +4,7 @@
  * ==============================================================================
  *
  * Authors: Alexander Alessi & Nicolas Alessi
- * Copyright (c) 2025 Knights Legacy Fund. All rights reserved.
+ * Copyright (c) 2026 Knights Legacy Fund. All rights reserved.
  */
 
 import React from 'react';
@@ -64,7 +64,7 @@ const Footer = ({ onNavigate }) => {
               </span>
             </button>
             <p className="text-xs text-gray-600 flex items-center gap-1">
-              © 2025 Knights Legacy Fund.
+              © 2026 Knights Legacy Fund.
               <ReactCountryFlag countryCode="US" svg style={{ width: '1.2em', height: '1.2em' }} />
             </p>
           </div>

@@ -5,7 +5,7 @@
  * Reusable card for Executive & Chair members
  * 
  * Authors: Alexander Alessi & Nicolas Alessi
- * Copyright (c) 2025 Knights Legacy Fund. All rights reserved.
+ * Copyright (c) 2026 Knights Legacy Fund. All rights reserved.
  */
 
 import React from 'react';

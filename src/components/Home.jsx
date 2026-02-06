@@ -4,7 +4,7 @@
  * ==============================================================================
  *
  * Authors: Alexander Alessi & Nicolas Alessi
- * Copyright (c) 2025 Knights Legacy Fund. All rights reserved.
+ * Copyright (c) 2026 Knights Legacy Fund. All rights reserved.
  */
 
 import React, { useState, useEffect } from 'react';
@@ -139,7 +139,7 @@ const Home = ({ onNavigate }) => {
           </div>
 
           <div className="text-right text-sm font-medium text-gray-600 mb-2">
-            2025 Goal: <span className="font-bold text-llhs-maroon">${goal.toLocaleString()}</span>
+            2025-2026 Goal: <span className="font-bold text-llhs-maroon">${goal.toLocaleString()}</span>
           </div>
 
           <div className="relative h-12 bg-white rounded-full overflow-hidden shadow-inner border-2 border-llhs-gold">

@@ -22,5 +22,11 @@
     "amount": "5000",
     "slug": "renee-white.png",
     "url": "https://www.reneewhiteteam.com/"
+  },
+  {
+    "name": "JVM Lending",
+    "amount": "5000",
+    "slug": "jvm.png",
+    "url": "https://www.jvmlending.com/"
   }
 ]

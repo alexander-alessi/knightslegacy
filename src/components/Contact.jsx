@@ -27,6 +27,10 @@ const Contact = () => {
             Have questions? We’d love to hear from you.<br />
           </p>
 
+          <p>
+            We meet every Monday from 2:30 - 3:30 at KLF headquarters in Walnut Creek, join us!<br />
+          </p>
+
           <div className="flex flex-col sm:flex-row justify-center gap-8 text-llhs-maroon">
             <a
               href="mailto:knightslegacy.org@gmail.com"

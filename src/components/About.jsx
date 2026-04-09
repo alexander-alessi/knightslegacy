@@ -113,7 +113,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Junior Interns */}
+      {/* Junior Interns – section hidden; interns no longer active
       <section className="bg-white p-10 rounded-3xl shadow-2xl">
         <div className="max-w-5xl mx-auto">
           <div className="text-center">
@@ -142,6 +142,7 @@ const About = () => {
           )}
         </div>
       </section>
+      */}
 
       {error && (
         <p className="text-center text-sm text-red-600 mt-4">{error}</p>

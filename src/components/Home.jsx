@@ -12,6 +12,7 @@ import React, { useState, useEffect } from 'react';
 const Home = ({ onNavigate }) => {
   const [raised, setRaised] = useState(0);
   const [goal, setGoal] = useState(50000);
+  const [fundYear, setFundYear] = useState('');
   const [loading, setLoading] = useState(true);
   const [donors, setDonors] = useState([]);
   const [currentDonorIndex, setCurrentDonorIndex] = useState(0);
@@ -41,6 +42,7 @@ const Home = ({ onNavigate }) => {
       .then(data => {
         setRaised(data.raised || 0);
         setGoal(data.goal || 50000);
+        setFundYear(data.year || '');
         setLoading(false);
       })
       .catch(err => {
@@ -69,7 +71,7 @@ const Home = ({ onNavigate }) => {
       const el = document.querySelector('.progress-fill');
       if (el) {
         setTimeout(() => {
-          el.style.width = `${percent}%`;
+          el.style.width = `${Math.min(percent, 100)}%`;
         }, 100);
       }
     }
@@ -181,17 +183,25 @@ const Home = ({ onNavigate }) => {
           </div>
 
           <div className="text-right text-sm font-medium text-gray-600 mb-2">
-            2025-2026 Goal: <span className="font-bold text-llhs-maroon">${goal.toLocaleString()}</span>
+            {fundYear ? `${fundYear} Goal:` : 'Goal:'} <span className="font-bold text-llhs-maroon">${goal.toLocaleString()}</span>
           </div>
 
+          {raised > goal && (
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm font-semibold text-llhs-gold">🎉 Goal exceeded!</span>
+              <span className="text-base font-bold text-llhs-maroon">${raised.toLocaleString()} raised</span>
+            </div>
+          )}
           <div className="relative h-12 bg-white rounded-full overflow-hidden shadow-inner border-2 border-llhs-gold">
             <div
-              className="progress-fill absolute inset-y-0 left-0 bg-llhs-maroon transition-all duration-[2200ms] ease-out flex items-center justify-end pr-6"
+              className={`progress-fill absolute inset-y-0 left-0 transition-all duration-[2200ms] ease-out flex items-center justify-end pr-6 ${raised > goal ? 'bg-llhs-gold' : 'bg-llhs-maroon'}`}
               style={{ width: 0 }}
             >
-              <span className="text-base md:text-lg font-bold text-white drop-shadow tracking-tight">
-                ${raised.toLocaleString()}
-              </span>
+              {raised <= goal && (
+                <span className="text-base md:text-lg font-bold text-white drop-shadow tracking-tight">
+                  ${raised.toLocaleString()}
+                </span>
+              )}
             </div>
           </div>
 

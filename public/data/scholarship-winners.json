@@ -1,0 +1,36 @@
+{
+	"enabled": true,
+	"year": "2026",
+	"recipients": [
+		{
+			"name": "Gabe Tenorio",
+			"amount": "$5,000",
+			"type": "Knight's Legacy Scholarship"
+		},
+		{
+			"name": "Sam Fotoohi",
+			"amount": "$5,000",
+			"type": "Knight's Legacy Scholarship"
+		},
+		{
+			"name": "Julia Soto Orono",
+			"amount": "$5,000",
+			"type": "Knight's Legacy Scholarship"
+		},
+		{
+			"name": "Kieran Hurley",
+			"amount": "$5,000",
+			"type": "Knight's Legacy Scholarship"
+		},
+		{
+			"name": "Ana Solorzano",
+			"amount": "$5,000",
+			"type": "Knight's Legacy Scholarship"
+		},
+		{
+			"name": "Angel Morales",
+			"amount": "$7,500",
+			"type": "Dominic Paul Maron Ferrell Memorial Scholarship"
+		}
+	]
+}

@@ -17,6 +17,20 @@ const Home = ({ onNavigate }) => {
   const [currentDonorIndex, setCurrentDonorIndex] = useState(0);
   const [error, setError] = useState(null);
   const [applicationEnabled, setApplicationEnabled] = useState(false);
+  const [scholarshipWinners, setScholarshipWinners] = useState([]);
+  const [scholarshipYear, setScholarshipYear] = useState('');
+  const [scholarshipEnabled, setScholarshipEnabled] = useState(false);
+
+  useEffect(() => {
+    fetch('/data/scholarship-winners.json')
+      .then(res => res.ok ? res.json() : { enabled: false })
+      .then(data => {
+        setScholarshipEnabled(data.enabled || false);
+        setScholarshipYear(data.year || '');
+        setScholarshipWinners(data.recipients || []);
+      })
+      .catch(() => setScholarshipEnabled(false));
+  }, []);
 
   useEffect(() => {
     fetch('/data/fund.json')
@@ -121,6 +135,34 @@ const Home = ({ onNavigate }) => {
           </p>
         </div>
       </section>
+
+      {/* SCHOLARSHIP WINNERS */}
+      {scholarshipEnabled && scholarshipWinners.length > 0 && (
+        <section className="bg-white p-10 rounded-3xl shadow-2xl">
+          <div className="text-center mb-8">
+            <h2 className="text-4xl font-bold text-llhs-maroon mb-2">
+              🎓 {scholarshipYear} Scholarship Recipients
+            </h2>
+            <p className="text-gray-600 text-lg mt-3 max-w-2xl mx-auto">
+              Congratulations to all of our scholarship recipients — your dedication, hard work, and commitment to your future inspire our entire community.
+            </p>
+            <div className="w-full h-px bg-gray-300 mt-6"></div>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            {scholarshipWinners.map((winner, i) => (
+              <div
+                key={i}
+                className="flex flex-col items-center text-center bg-gray-50 border border-llhs-gold/30 rounded-2xl p-6 shadow-md"
+              >
+                <div className="text-3xl mb-3">🏅</div>
+                <p className="text-xl font-bold text-llhs-maroon mb-1">{winner.name}</p>
+                <p className="text-2xl font-extrabold text-llhs-gold mb-2">{winner.amount}</p>
+                <p className="text-sm text-gray-500 italic">{winner.type}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Progress Bar */}
       <section className="bg-white p-10 rounded-3xl shadow-2xl">

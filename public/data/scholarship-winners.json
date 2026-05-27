@@ -3,54 +3,9 @@
 	"year": "2026",
 	"recipients": [
 		{
-			"name": "Pyush Vyas",
-			"amount": "$500",
-			"type": "Knight's Legacy Scholarship"
-		},
-		{
-			"name": "Jada Coleman",
-			"amount": "$500",
-			"type": "Knight's Legacy Scholarship"
-		},
-		{
-			"name": "Elija Konson",
-			"amount": "$500",
-			"type": "Knight's Legacy Scholarship"
-		},
-		{
-			"name": "Giovanna Jeswald",
-			"amount": "$1,000",
-			"type": "Knight's Legacy Scholarship"
-		},
-		{
-			"name": "Gideon Garanton",
-			"amount": "$1,000",
-			"type": "Knight's Legacy Scholarship"
-		},
-		{
-			"name": "Grace Chiu",
-			"amount": "$1,000",
-			"type": "Knight's Legacy Scholarship"
-		},
-		{
-			"name": "Warren Nishi",
-			"amount": "$2,000",
-			"type": "Knight's Legacy Scholarship"
-		},
-		{
-			"name": "Noah Sison",
-			"amount": "$2,000",
-			"type": "Knight's Legacy Scholarship"
-		},
-		{
-			"name": "Allisa Yankelevich",
-			"amount": "$2,000",
-			"type": "Knight's Legacy Scholarship"
-		},
-		{
-			"name": "Julienne Erzando",
-			"amount": "$2,000",
-			"type": "Knight's Legacy Scholarship"
+			"name": "Angel Morales",
+			"amount": "$7,500",
+			"type": "Dominic Paul Maron Ferrell Memorial Scholarship"
 		},
 		{
 			"name": "Gabe Tenorio",
@@ -78,9 +33,54 @@
 			"type": "Knight's Legacy Scholarship"
 		},
 		{
-			"name": "Angel Morales",
-			"amount": "$7,500",
-			"type": "Dominic Paul Maron Ferrell Memorial Scholarship"
+			"name": "Warren Nishi",
+			"amount": "$2,000",
+			"type": "Knight's Legacy Scholarship"
+		},
+		{
+			"name": "Noah Sison",
+			"amount": "$2,000",
+			"type": "Knight's Legacy Scholarship"
+		},
+		{
+			"name": "Allisa Yankelevich",
+			"amount": "$2,000",
+			"type": "Knight's Legacy Scholarship"
+		},
+		{
+			"name": "Julienne Erzando",
+			"amount": "$2,000",
+			"type": "Knight's Legacy Scholarship"
+		},
+		{
+			"name": "Giovanna Jeswald",
+			"amount": "$1,000",
+			"type": "Knight's Legacy Scholarship"
+		},
+		{
+			"name": "Gideon Garanton",
+			"amount": "$1,000",
+			"type": "Knight's Legacy Scholarship"
+		},
+		{
+			"name": "Grace Chiu",
+			"amount": "$1,000",
+			"type": "Knight's Legacy Scholarship"
+		},
+		{
+			"name": "Pyush Vyas",
+			"amount": "$500",
+			"type": "Knight's Legacy Scholarship"
+		},
+		{
+			"name": "Jada Coleman",
+			"amount": "$500",
+			"type": "Knight's Legacy Scholarship"
+		},
+		{
+			"name": "Elija Konson",
+			"amount": "$500",
+			"type": "Knight's Legacy Scholarship"
 		}
 	]
 }

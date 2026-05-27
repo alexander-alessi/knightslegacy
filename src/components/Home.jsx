@@ -159,7 +159,11 @@ const Home = ({ onNavigate }) => {
                 <div className="text-3xl mb-3">🏅</div>
                 <p className="text-xl font-bold text-llhs-maroon mb-1">{winner.name}</p>
                 <p className="text-2xl font-extrabold text-llhs-gold mb-2">{winner.amount}</p>
-                <p className="text-sm text-gray-500 italic">{winner.type}</p>
+                {parseInt(winner.amount.replace(/[$,]/g, '')) >= 5000 ? (
+                  <span className="inline-block px-3 py-1 text-xs font-bold text-llhs-gold bg-llhs-maroon rounded-full border border-llhs-gold/60">{parseInt(winner.amount.replace(/[$,]/g, '')) > 5000 ? '👼 ' : ''}{winner.type}</span>
+                ) : (
+                  <span className="inline-block px-3 py-1 text-xs font-semibold text-llhs-maroon bg-llhs-gold/20 rounded-full border border-llhs-gold/40">{winner.type}</span>
+                )}
               </div>
             ))}
           </div>
